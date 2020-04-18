@@ -1,6 +1,6 @@
 # Inventory Management
 
-This project is a Inventory Management System. It is made with React Native and Node. This project was bootstrapped with **[create-react-app](https://github.com/facebook/create-react-app)**.
+This repository is an Inventory Management System made by [Anubis-spec](https://github.com/Anubis-spec) and was made with [React Native](https://reactnative.dev/) and [Node.js](https://nodejs.org/en/). This project was bootstrapped with the **[create-react-app](https://github.com/facebook/create-react-app)**.
 
 ## Getting Started
 
