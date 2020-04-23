@@ -23,12 +23,11 @@ class Table extends React.Component {
          return <th key={index}>{key.toUpperCase()}</th>
       })
    }
-
    renderTableData() {
       return this.state.stock.map((info, index) => {
          const { id, item, quantity} = info 
          return (
-            <tr key={id}>
+            <tr key={index}>
                <td>{id}</td>
                <td>{item}</td>
                <td>{quantity}</td>
@@ -36,13 +35,18 @@ class Table extends React.Component {
                <EditOutlined />
                </td> 
                   <td>
-                  <DeleteOutlined />
+                  <DeleteOutlined onClick={() => this.props.removeItem(index)}/>
                </td>
             </tr>
          )
       })
    }
-
+   removeItem(removeIndex) {
+      this.setState((state) => ({
+        ...state,
+        items: this.state.items.filter((stock, index) => index !== removeIndex)
+      }))
+    }
    render() {
       return (
          <div>
@@ -51,6 +55,7 @@ class Table extends React.Component {
                <tbody>
                   <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableData()}
+                  {this.removeItem.bind(this)}
                </tbody>
             </table>
          </div>
