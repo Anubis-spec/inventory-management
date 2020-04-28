@@ -3,20 +3,24 @@ import './App.css'
 import 'list.js'
 import EditOutlined from '@ant-design/icons/EditOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
-
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
 class Table extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
          stock: [
-            { id: 1, item: '', quantity: 21 },
-            { id: 2, item: '', quantity: 19 },
-            { id: 3, item: '', quantity: 16 },
-            { id: 4, item: '', quantity: 25 }
+            { id: 1, item: 'Computer', quantity: 21 },
+            { id: 2, item: 'Phone', quantity: 19 },
+            { id: 3, item: 'Monitor', quantity: 16 },
+            { id: 4, item: 'Phone', quantity: 25 }
          ]
       }
    }
-
+   deleteItem(index) {
+      const { stock } = this.state;
+      stock.splice(index, 1);
+      this.setState({ index });
+    }
    renderTableHeader() {
       let header = Object.keys(this.state.stock[0])
       return header.map((key, index) => {
@@ -27,7 +31,7 @@ class Table extends React.Component {
       return this.state.stock.map((info, index) => {
          const { id, item, quantity} = info 
          return (
-            <tr key={index}>
+            <tr key={id}>
                <td>{id}</td>
                <td>{item}</td>
                <td>{quantity}</td>
@@ -35,18 +39,12 @@ class Table extends React.Component {
                <EditOutlined />
                </td> 
                   <td>
-                  <DeleteOutlined onClick={() => this.props.removeItem(index)}/>
+                  <DeleteOutlined onClick={this.deleteItem.bind(this, index)}/>
                </td>
             </tr>
          )
       })
    }
-   removeItem(removeIndex) {
-      this.setState((state) => ({
-        ...state,
-        items: this.state.items.filter((stock, index) => index !== removeIndex)
-      }))
-    }
    render() {
       return (
          <div>
@@ -55,7 +53,6 @@ class Table extends React.Component {
                <tbody>
                   <tr>{this.renderTableHeader()}</tr>
                   {this.renderTableData()}
-                  {this.removeItem.bind(this)}
                </tbody>
             </table>
          </div>
